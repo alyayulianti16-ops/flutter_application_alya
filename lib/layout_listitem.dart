@@ -5,6 +5,7 @@ abstract class ListItem {
   Widget buildTitle(BuildContext context);
   Widget buildSubtitle(BuildContext context);
 }
+
 //2. headingitem
 class HeadingItem implements ListItem {
   final String heading;
@@ -17,8 +18,11 @@ class HeadingItem implements ListItem {
       style: Theme.of(context).textTheme.headlineSmall,
     );
   }
-  @override Widget buildSubtitle(BuildContext context)=> const SizedBox.shrink();
-  }
+
+  @override
+  Widget buildSubtitle(BuildContext context) => const SizedBox.shrink();
+}
+
 //3.massageitem
 class MessageItem implements ListItem {
   late final String sender;
@@ -30,10 +34,11 @@ class MessageItem implements ListItem {
   Widget buildTitle(BuildContext context) => Text(sender);
 
   @override
-  Widget buildSubtitle(BuildContext context)=> Text(body);
-  }
-  //widget utama
-  class LayoutListitem extends StatelessWidget {
+  Widget buildSubtitle(BuildContext context) => Text(body);
+}
+
+//widget utama
+class LayoutListitem extends StatelessWidget {
   const LayoutListitem({super.key});
 
   @override
@@ -42,11 +47,21 @@ class MessageItem implements ListItem {
     final List<ListItem> items = List<ListItem>.generate(
       20,
       (i) => i % 6 == 0
-      ?HeadingItem('heading $i')
-      :MessageItem('sender $i','body $i'),
-      
+          ? HeadingItem('heading $i')
+          : MessageItem('sender $i', 'body $i'),
     );
 
-    return scaffold()
+    return Scaffold(
+      appBar: AppBar(title: const Text('List Dengan Berbagai Item')),
+      body: ListView.builder(
+          itemCount: items.length,
+          itemBuilder: (context, Index) {
+            final item = items[Index];
+            return ListTile(
+              title: item.buildSubtitle(context),
+              subtitle: item.buildSubtitle(context),
+            );
+          }),
+    );
   }
 }
