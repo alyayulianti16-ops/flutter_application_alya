@@ -34,5 +34,58 @@ class MessageItem extends ListItem {
   MessageItem(this.sender, this.body);
 
   @override
-  Widget builditem(BuildContext context)
+  Widget builditem(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      child: Padding(
+        padding: EdgeInsets.all(12.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(Icons.message, color: Colors.pinkAccent),
+            SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    sender,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  )
+                ],
+              )
+              )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+//4.ImageItem
+class ImageItem extends ListItem{
+  final String title;
+  final String ImagePath;
+  ImageItem(this.title, this.ImagePath);
+
+  @override
+  Widget builditem(BuildContext context){
+    return Card(
+      margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              title,
+              style: TextStyle(
+                fontWeight: 
+              ),
+            ),
+          )
+        ],
+      ),
+    )
+  }
 }
