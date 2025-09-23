@@ -27,6 +27,7 @@ class HeadingItem implements ListItem {
 class MessageItem implements ListItem {
   late final String sender;
   late final String body;
+  
 
   MessageItem(this.sender, this.body);
 
@@ -47,7 +48,7 @@ class LayoutListitem extends StatelessWidget {
     final List<ListItem> items = List<ListItem>.generate(
       20,
       (i) => i % 6 == 0
-          ? HeadingItem('heading $i')
+          ? HeadingItem('Heading $i')
           : MessageItem('sender $i', 'body $i'),
     );
 
@@ -55,6 +56,7 @@ class LayoutListitem extends StatelessWidget {
       appBar: AppBar(title: const Text('List Dengan Berbagai Item')),
       body: ListView.builder(
           itemCount: items.length,
+          // ignore: non_constant_identifier_names
           itemBuilder: (context, Index) {
             final item = items[Index];
             return ListTile(
