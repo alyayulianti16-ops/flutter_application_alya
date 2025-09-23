@@ -12,8 +12,9 @@ class LayoutWidget extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 241, 167, 211),
       ),
       body: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset("Images/logo_ypc.png"),
+          Image.asset("Images/logo_ypc.png"), const Center(),
           const SizedBox(height: 10),
           const Text(
             'SMK YPC Tasikmalaya',
