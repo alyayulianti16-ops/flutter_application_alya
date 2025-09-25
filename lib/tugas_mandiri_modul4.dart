@@ -65,27 +65,74 @@ class MessageItem extends ListItem {
 //4.ImageItem
 class ImageItem extends ListItem{
   final String title;
+  // ignore: non_constant_identifier_names
   final String ImagePath;
   ImageItem(this.title, this.ImagePath);
 
   @override
   Widget builditem(BuildContext context){
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Text(
               title,
-              style: TextStyle(
-                fontWeight: 
-              ),
-            ),
-          )
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              )
+            )
+          ),
+          //gambar full lebar
+          Image.asset(
+            ImagePath,
+            width: double.infinity,
+            height: 200,
+            fit: BoxFit.cover,
+          ),
         ],
       ),
-    )
+    );
+  }
+}
+
+//widget uutama
+class LayuotlistItem extends StatelessWidget {
+  const LayuotlistItem({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final List<ListItem> items = List<ListItem>.generate(
+      30,
+      (i) {
+        if (i % 5 == 0){
+          return HeadingItem('heading $i');
+        } else if (i % 3 == 0){
+          final images = [
+            'images/fto1.jpg',
+            'images/fto2.jpg',
+            'images/fto3.jpg',
+          ];
+          return ImageItem('image item $i', images[(i ~/ 3) % images.length]);
+        } else {
+          return MessageItem('Sender $i', 'Message body $i');
+        }
+      }
+    );
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("List dengan berbagai item"),
+      ),
+      body: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index){
+          return items[index].builditem(context);
+        }
+      ),
+    );
   }
 }
